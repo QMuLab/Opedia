@@ -41,7 +41,8 @@ python inference.py
 - Ensure gene names are gene symbols
 - Output results display cell types ranked by confidence scores
 ## 8. Reference and contact
-We finetuned scGPT model for osteosarcoma. The original publication for scGPT is follow.
-Cui, H., Wang, C., Maan, H., Pang, K., Luo, F., Duan, N., & Wang, B. (2024). scGPT: toward building a foundation model for single-cell multi-omics using generative AI. Nature methods, 21(8), 1470-1480.
+We finetuned scGPT model for osteosarcoma. The original publication for scGPT is as follows.
+
+`Cui, H., Wang, C., Maan, H., Pang, K., Luo, F., Duan, N., & Wang, B. (2024). scGPT: toward building a foundation model for single-cell multi-omics using generative AI. Nature methods, 21(8), 1470-1480.`
 
 If you encounter any questions in using our model, please contact quanhua.muATpolyu.edu.hk
