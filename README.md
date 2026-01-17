@@ -13,7 +13,7 @@ This is an osteosarcoma single-cell annotation tool based on the scGPT model.
 ## 3. Model Checkpoint Configuration
 - Ensure trained model files exist in the `./ckpt/` directory
 - Required files include:
-  - [model.pt](./ckpt/model.pt) - Model weights file
+  - [model.pt](./ckpt/model.pt) - Model weights file - Please download this file from [here](https://drive.google.com/file/d/1TNhdCv1sFgZf7c_4dOxP7CBwrTJDAdkq/view?usp=sharing)
   - [vocab.json](./ckpt/vocab.json) - Vocabulary file
   - [id2type.json](./ckpt/id2type.json) - ID to type mapping file
 
