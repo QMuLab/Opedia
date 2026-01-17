@@ -1,2 +1,2 @@
 # Opedia
-This is a osteosarcoma single-cell annotation tool.
+This is an osteosarcoma single-cell annotation tool.
