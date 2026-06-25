@@ -52,6 +52,8 @@ sc.set_figure_params(figsize=(6, 6))
 os.environ["KMP_WARNINGS"] = "off"
 warnings.filterwarnings('ignore')
 
+start_time = time.time()
+
 
 # settings for input and preprocessing
 pad_token = "<pad>"
@@ -139,13 +141,14 @@ if ADV and DAB:
 DAB_separate_optim = True if DAB > 1 else False
 
 
-vocab_file = '.\ckpt\dev_data_7ds-Mar07-14-37\vocab.json'
+ckpt_dir = Path("./ckpt/dev_data_7ds-Mar07-14-37")
+vocab_file = ckpt_dir / "vocab.json"
 vocab = GeneVocab.from_file(vocab_file)
 vocab.set_default_index(vocab["<pad>"])
 
-state_dict = torch.load(".\ckpt\dev_data_7ds-Mar07-14-37\model.pt")
+state_dict = torch.load(ckpt_dir / "model.pt")
 
-with open(".\ckpt\dev_data_7ds-Mar07-14-37\id2type.json", "r") as f:
+with open(ckpt_dir / "id2type.json", "r") as f:
     id2type = json.load(f)
 
 id2type = {int(k): v for k, v in id2type.items()}
@@ -156,10 +159,10 @@ id2type = {int(k): v for k, v in id2type.items()}
 ########################################################################################################################
 # custom 
 
-save_dir = Path(".\save")
+save_dir = Path("./save")
 save_dir.mkdir(parents=True, exist_ok=True)
 
-adata = sc.read_h5ad('custom_file_path')  # 读取第一个h5ad
+adata = sc.read_h5ad('custom_file_path')  # ./demo/demo_input.h5ad
 adata.var["gene_name"] = adata.var.index.tolist()
 
 ########################################################################################################################
@@ -175,7 +178,7 @@ print(
         f"match {np.sum(gene_ids_in_vocab >= 0)}/{len(gene_ids_in_vocab)} genes "
         f"in vocabulary of size {len(vocab)}."
     )
-adata = adata[:, adata.var["id_in_vocab"] >= 0]
+adata = adata[:, adata.var["id_in_vocab"] >= 0].copy()
 
 data_is_raw = False
 freeze = False
@@ -445,3 +448,7 @@ sorted_type_names = [[id2type[int(i)] for i in row] for row in sorted_indices.to
 df = pd.DataFrame(sorted_type_names)
 save_path = save_dir / "rst.csv"
 df.to_csv(save_path, index=True, header=[f"rank_{i+1}" for i in range(df.shape[1])])
+
+elapsed_time = time.time() - start_time
+print(f"Inference completed successfully. Results saved to {save_path}")
+print(f"Total runtime: {elapsed_time:.2f} seconds")
